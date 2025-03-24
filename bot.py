@@ -7,7 +7,11 @@ intents.members = True  # Botun kullanıcılarla çalışmasına ve onları banl
 intents.message_content = True
 
 bot = commands.Bot(command_prefix='!', intents=intents)
-
+@bot.event
+async def on_member_join(member):
+    # Karşılama mesajı gönderme
+    for channel in member.guild.text_channels:
+        await channel.send(f’ Hoş geldiniz: ben üst düzey bir discord botuyum, {member.mention}!')
 @bot.event
 async def on_ready():
     print(f'Giriş yapıldı:  {bot.user.name}')
